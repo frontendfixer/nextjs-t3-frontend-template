@@ -22,6 +22,7 @@ const config = {
     'prettier', // Make sure to put it last in the extends array
   ],
   rules: {
+    '@typescript-eslint/prefer-nullish-coalescing': 'off',
     '@typescript-eslint/array-type': 'off',
     '@typescript-eslint/consistent-type-definitions': 'off',
     '@typescript-eslint/consistent-type-imports': [
