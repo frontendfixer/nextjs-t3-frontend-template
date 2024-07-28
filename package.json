@@ -2,12 +2,25 @@
   "name": "nextjs-t3-frontend-template",
   "version": "0.1.0",
   "private": true,
+  "description": "Next.js Frontend Template with T3 Stack with shadcn/ui library",
+  "author": {
+    "name": "Lakshmikanta Patra",
+    "email": "frontendfixer@gmail.com",
+    "url": "https://frontendfixer.github.io/"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frontendfixer/nextjs-t3-frontend-template.git"
+  },
+  "homepage": "https://github.com/frontendfixer/nextjs-t3-frontend-template#readme",
   "type": "module",
   "scripts": {
+    "start": "next start -p 80",
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "lint:fix": "next lint --fix"
   },
   "dependencies": {
     "@t3-oss/env-nextjs": "^0.11.0",
