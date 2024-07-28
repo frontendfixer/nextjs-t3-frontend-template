@@ -1,3 +1,5 @@
+'use client';
+
 import {
   ChevronLeft,
   ChevronRight,
@@ -72,8 +74,11 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '~/components/ui/tooltip';
+import { useAppContext } from '~/providers/AppProviders';
 
 export default function Dashboard() {
+  const { app } = useAppContext();
+
   return (
     <div className="flex min-h-screen w-full flex-col">
       <aside className="bg-background fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r sm:flex">
@@ -266,7 +271,7 @@ export default function Dashboard() {
                 className="overflow-hidden rounded-full"
               >
                 <Image
-                  src="/placeholder-user.jpg"
+                  src="/icons/user.svg"
                   width={36}
                   height={36}
                   alt="Avatar"
@@ -717,10 +722,27 @@ export default function Dashboard() {
               </CardFooter>
             </Card>
             <div className="flex flex-wrap items-center gap-3 py-2">
-              <Button>Primary</Button>
-              <Button variant="destructive">Destructive</Button>
-              <Button variant="success">Success</Button>
-              <Button variant="warning">Warning</Button>
+              <Button onClick={() => app.toastPrimary('Toast display')}>
+                Primary
+              </Button>
+              <Button
+                variant="destructive"
+                onClick={() => app.toastError('Something went wrong!')}
+              >
+                Destructive
+              </Button>
+              <Button
+                variant="success"
+                onClick={() => app.toastSuccess('Toast display success')}
+              >
+                Success
+              </Button>
+              <Button
+                variant="warning"
+                onClick={() => app.toastWarn('Toast display warning!')}
+              >
+                Warning
+              </Button>
               <Button variant="outline">Outline</Button>
               <Button variant="ghost">Ghost</Button>
               <Button variant="secondary">secondary</Button>

@@ -3,7 +3,7 @@ import '~/styles/globals.css';
 import { GeistSans } from 'geist/font/sans';
 import { type Metadata } from 'next';
 
-import { ThemeProvider } from '~/providers/theme-provider';
+import AppProviders from '~/providers/AppProviders';
 
 export const metadata: Metadata = {
   title: 'Create T3 App',
@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <AppProviders>{children}</AppProviders>
       </body>
     </html>
   );
