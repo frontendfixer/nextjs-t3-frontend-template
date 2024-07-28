@@ -1,0 +1,40 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# Top-most EditorConfig file
+root = true
+
+# Automatically adjust line endings for different OS environments
+[*]
+end_of_line = auto
+insert_final_newline = true
+
+# 2 space indentation
+indent_style = space
+indent_size = 2
+
+# Set default charset
+charset = utf-8
+
+# Trim trailing whitespace in all files
+trim_trailing_whitespace = true
+
+# Matches multiple files with different extensions
+[*.{js,jsx,ts,tsx,json,css,scss,md,yml}]
+indent_style = space
+indent_size = 2
+
+# Specific settings for Markdown files
+[*.md]
+trim_trailing_whitespace = false
+
+# Specific settings for JSON files
+[*.json]
+quote_type = double
+
+# Specific settings for TypeScript files
+[*.ts]
+quote_type = single
+
+# Specific settings for TypeScript React files
+[*.tsx]
+quote_type = single
