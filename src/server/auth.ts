@@ -3,7 +3,6 @@ import {
   getServerSession,
   type NextAuthOptions,
 } from 'next-auth';
-import DiscordProvider from 'next-auth/providers/discord';
 
 import { env } from '~/env';
 
@@ -17,15 +16,13 @@ declare module 'next-auth' {
   interface Session extends DefaultSession {
     user: {
       id: string;
-      // ...other properties
-      // role: UserRole;
+      role: 'user' | 'admin';
     } & DefaultSession['user'];
   }
-
-  // interface User {
-  //   // ...other properties
-  //   // role: UserRole;
-  // }
+  interface User {
+    id: string;
+    role: 'user' | 'admin';
+  }
 }
 
 /**
@@ -35,29 +32,33 @@ declare module 'next-auth' {
  */
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    session: ({ session, token }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: token.sub,
-      },
-    }),
+    jwt({ token, user }) {
+      if (user) {
+        return {
+          ...token,
+          id: user.id,
+          role: user.role,
+        };
+      }
+      return token;
+    },
+    session({ session, token }) {
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: token.id,
+          role: token.role,
+        },
+      };
+    },
   },
-  providers: [
-    DiscordProvider({
-      clientId: env.DISCORD_CLIENT_ID,
-      clientSecret: env.DISCORD_CLIENT_SECRET,
-    }),
-    /**
-     * ...add more providers here.
-     *
-     * Most other providers require a bit more work than the Discord provider. For example, the
-     * GitHub provider requires you to add the `refresh_token_expires_in` field to the Account
-     * model. Refer to the NextAuth.js docs for the provider you want to use. Example:
-     *
-     * @see https://next-auth.js.org/providers/github
-     */
-  ],
+  session: {
+    strategy: 'jwt',
+    maxAge: 7 * 24 * 60 * 60, // 7 days
+  },
+  secret: env.NEXTAUTH_SECRET,
+  providers: [],
 };
 
 /**
