@@ -10,6 +10,8 @@ export const env = createEnv({
     NODE_ENV: z
       .enum(['development', 'test', 'production'])
       .default('development'),
+      PRODUCTION_FRONTEND_URL:z.string().url(),
+      LOCAL_FRONTEND_URL:z.string().url(),
     NEXTAUTH_SECRET:
       process.env.NODE_ENV === 'production'
         ? z.string()
@@ -33,6 +35,8 @@ export const env = createEnv({
    */
   runtimeEnv: {
     NODE_ENV: process.env.NODE_ENV,
+    PRODUCTION_FRONTEND_URL: process.env.PRODUCTION_FRONTEND_URL,
+    LOCAL_FRONTEND_URL: process.env.LOCAL_FRONTEND_URL,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     NEXT_PUBLIC_PRODUCTION_API_URL: process.env.NEXT_PUBLIC_PRODUCTION_API_URL,
