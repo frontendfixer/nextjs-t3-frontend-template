@@ -1,11 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import axios, { type CancelToken } from 'axios';
+import { env } from '~/env';
 
 export const baseURL =
-  process.env.NODE_ENV === 'production'
-    ? process.env.PRODUCTION_API_URL
-    : process.env.LOCAL_API_URL;
+  env.NODE_ENV === 'production'
+    ? env.NEXT_PUBLIC_PRODUCTION_API_URL
+    : env .NEXT_PUBLIC_LOCAL_API_URL;
 
 const instance = axios.create({
   baseURL,
